@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "68480610638",
+    "firebase_url": "https://hakathon2020-480e3.firebaseio.com",
+    "project_id": "hakathon2020-480e3",
+    "storage_bucket": "hakathon2020-480e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:68480610638:android:b1e0b26756347923eb6e1f",
+        "android_client_info": {
+          "package_name": "hassankabha.com.hakathon2020"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "68480610638-po8cu2lbuv43aej8d31b7358ljq25jrh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuFziGozjSKvZFVoQ8zoYMdSsRM_dj6jQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "68480610638-po8cu2lbuv43aej8d31b7358ljq25jrh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
