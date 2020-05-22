@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'constans.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'StuffList.dart';
+
+final _firestore = Firestore.instance;
 
 class MyFormsPage extends StatefulWidget {
   @override
@@ -12,6 +16,7 @@ class _MyFormsPageState extends State<MyFormsPage> {
   String name;
   String phone;
   String address;
+  String region = "Haifa";
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +35,11 @@ class _MyFormsPageState extends State<MyFormsPage> {
       }
 
       return CupertinoPicker(
-        backgroundColor: Colors.lightBlue,
         itemExtent: 32.0,
         onSelectedItemChanged: (selectedIndex) {
-          print(selectedIndex);
+          setState(() {
+            region = AddressList[selectedIndex];
+          });
         },
         children: myItems,
       );
@@ -89,8 +95,11 @@ class _MyFormsPageState extends State<MyFormsPage> {
                               width: 10.0,
                             ),
                             SizedBox(
-                              width: 250,
+                              width: 200,
                               child: TextFormField(
+                                onChanged: (value) {
+                                  name = value;
+                                },
                                 style: TextStyle(
                                     fontSize: 16.0,
                                     fontFamily: 'Averta',
@@ -103,65 +112,12 @@ class _MyFormsPageState extends State<MyFormsPage> {
                                       color: Colors.grey,
                                       fontFamily: 'Averta'),
                                 ),
-                                controller: _nameController,
-                                validator: (String value) {
-                                  if (value.isEmpty) {
-                                    return 'Please insert your name';
-                                  }
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: 380,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: secondary,
-                          borderRadius: BorderRadius.circular(14.0),
-                        ),
-                        margin: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 20.0),
-                        child: Row(
-                          children: <Widget>[
-                            SizedBox(
-                              width: 20.0,
-                            ),
-                            Icon(Icons.person_outline,
-                                size: 20.0, color: Colors.grey),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(color: Colors.grey),
-                              width: 1.0,
-                              height: 30.0,
-                            ),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                            SizedBox(
-                              width: 250,
-                              child: TextFormField(
-                                style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontFamily: 'Averta',
-                                    color: Colors.black),
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'Name',
-                                  hintStyle: TextStyle(
-                                      fontSize: 16.0,
-                                      color: Colors.grey,
-                                      fontFamily: 'Averta'),
-                                ),
-                                controller: _nameController,
-                                validator: (String value) {
-                                  if (value.isEmpty) {
-                                    return 'Please insert your name';
-                                  }
-                                },
+                                // controller: _nameController,
+//                                validator: (String value) {
+//                                  if (value.isEmpty) {
+//                                    return 'Please insert your name';
+//                                  }
+//                                },
                               ),
                             ),
                           ],
@@ -194,8 +150,11 @@ class _MyFormsPageState extends State<MyFormsPage> {
                               width: 10.0,
                             ),
                             SizedBox(
-                              width: 250,
+                              width: 200,
                               child: TextFormField(
+                                onChanged: (value) {
+                                  phone = value;
+                                },
                                 keyboardType: TextInputType.numberWithOptions(),
                                 style: TextStyle(
                                     fontSize: 16.0,
@@ -210,11 +169,11 @@ class _MyFormsPageState extends State<MyFormsPage> {
                                       fontFamily: 'Averta'),
                                 ),
                                 controller: _phoneController,
-                                validator: (String value) {
-                                  if (value.isEmpty) {
-                                    return 'Please insert your Phone';
-                                  }
-                                },
+//                                validator: (String value) {
+//                                  if (value.isEmpty) {
+//                                    return 'Please insert your Phone';
+//                                  }
+//                                },
                               ),
                             ),
                           ],
@@ -248,7 +207,43 @@ class _MyFormsPageState extends State<MyFormsPage> {
                             ),
                             SizedBox(
                               width: 228,
+                              child: getPickerAddress(),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: 400,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color: secondary,
+                          borderRadius: BorderRadius.circular(14.0),
+                        ),
+                        margin: EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 20.0),
+                        child: Row(
+                          children: <Widget>[
+                            SizedBox(
+                              width: 20.0,
+                            ),
+                            Icon(Icons.home, size: 20.0, color: Colors.grey),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(color: Colors.grey),
+                              width: 1.0,
+                              height: 30.0,
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            SizedBox(
+                              width: 228,
                               child: TextFormField(
+                                onChanged: (value) {
+                                  address = value;
+                                },
                                 style: TextStyle(
                                     fontSize: 16.0,
                                     fontFamily: 'Averta',
@@ -260,11 +255,11 @@ class _MyFormsPageState extends State<MyFormsPage> {
                                       color: Colors.grey, fontFamily: 'Averta'),
                                 ),
                                 controller: _addressController,
-                                validator: (String value) {
-                                  if (value.isEmpty) {
-                                    return 'Please choose your address';
-                                  }
-                                },
+//                                validator: (String value) {
+//                                  if (value.isEmpty) {
+//                                    return 'Please choose your address';
+//                                  }
+//                                },
                               ),
                             ),
                           ],
@@ -284,14 +279,24 @@ class _MyFormsPageState extends State<MyFormsPage> {
                   color: colorNextButton,
                   child: InkWell(
                     onTap: () {
-                      setState(() {
-                        if (_formKey.currentState.validate()) {
-                          name = _nameController.text;
-                          address = _addressController.text;
-                          phone = _phoneController.text;
-                          // Navigator.push(context, MaterialPageRoute(builder: (context) => SpesaPage(boomerInfo: boomerInfo,)));
-                        }
-                      });
+//                      setState(() {
+//                        if (_formKey.currentState.validate()) {
+//                          name = _nameController.text;
+//                          address = _addressController.text;
+//                          phone = _phoneController.text;
+//
+//                          // Navigator.push(context, MaterialPageRoute(builder: (context) => SpesaPage(boomerInfo: boomerInfo,)));
+//                        }
+//                      });
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Stuff(
+                                    phone: phone,
+                                    address: address,
+                                    region: region,
+                                    name: name,
+                                  )));
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'WelcomePage.dart';
 import 'odlInfo.dart';
+import 'volunteer.dart';
+import 'volunteerOrdersByRegion.dart';
+import 'viewStory.dart';
+import 'viewOrder.dart';
 
 void main() {
   runApp(MyApp());
@@ -51,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     getMessages();
     return Scaffold(
-      body: MyFormsPage(),
+      body: WelcomePage(),
     );
   }
 }

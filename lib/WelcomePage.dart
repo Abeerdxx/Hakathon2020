@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'constans.dart';
+import 'volunteer.dart';
+import 'odlInfo.dart';
+import 'volunteerOrdersByRegion.dart';
+import 'workerLog.dart';
+import 'donate.dart';
+import 'DonationService.dart';
+import 'viewStory.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -9,6 +16,8 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
+    DonationService d = DonationService();
+    print(d.getDonations);
     return Container(
       color: primary,
       child: SafeArea(
@@ -17,12 +26,12 @@ class _WelcomePageState extends State<WelcomePage> {
           children: <Widget>[
             Container(
               color: primary,
-              height: 100,
+              height: 50,
               child: Column(
                 children: <Widget>[
                   Container(
                     margin:
-                        EdgeInsets.only(bottom: 30.0, left: 10.0, right: 10.0),
+                        EdgeInsets.only(bottom: 15.0, left: 10.0, right: 10.0),
                     child: Center(
                       child: Text('Please Choose',
                           textAlign: TextAlign.center,
@@ -45,11 +54,15 @@ class _WelcomePageState extends State<WelcomePage> {
                         flex: 1,
                         child: FlatButton(
                           color: primary,
-                          // onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ResultPage())),
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      VolunteerOrdersByRegion())),
                           child: Container(
                             margin: EdgeInsets.all(4.0),
-                            height: 300,
-                            width: 200,
+                            height: 250,
+                            width: 150,
                             decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
@@ -71,8 +84,8 @@ class _WelcomePageState extends State<WelcomePage> {
                               children: <Widget>[
                                 Center(
                                   child: Image(
-                                    image: new AssetImage(
-                                        "assets/images/kidrunning.png"),
+                                    image:
+                                        new AssetImage("assets/images/v2.jpg"),
                                   ),
                                 ),
                                 SizedBox(
@@ -91,11 +104,14 @@ class _WelcomePageState extends State<WelcomePage> {
                       flex: 1,
                       child: FlatButton(
                         color: primary,
-                        // onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MyFormsPage())),
+                        onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyFormsPage())),
                         child: Container(
                           margin: EdgeInsets.all(4.0),
-                          height: 300,
-                          width: 200,
+                          height: 250,
+                          width: 150,
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -118,12 +134,12 @@ class _WelcomePageState extends State<WelcomePage> {
                               Center(
                                   child: Image(
                                       image: new AssetImage(
-                                          "assets/images/oldies.png"))),
+                                          "assets/images/elder5.png"))),
                               //Image.asset('images/female.png',height: 100.0,width: 100.0,),
                               SizedBox(
                                 height: 20.0,
                               ),
-                              Text('Oldies',
+                              Text('Elder',
                                   style: TextStyle(
                                       fontFamily: 'Averta',
                                       fontSize: 16.0,
@@ -142,11 +158,14 @@ class _WelcomePageState extends State<WelcomePage> {
                         flex: 1,
                         child: FlatButton(
                           color: primary,
-                          // onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ResultPage())),
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Donation())),
                           child: Container(
                             margin: EdgeInsets.all(4.0),
-                            height: 300,
-                            width: 200,
+                            height: 250,
+                            width: 150,
                             decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
@@ -186,11 +205,14 @@ class _WelcomePageState extends State<WelcomePage> {
                       flex: 1,
                       child: FlatButton(
                         color: primary,
-                        // onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MyFormsPage())),
+                        onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WorkerLog())),
                         child: Container(
                           margin: EdgeInsets.all(4.0),
-                          height: 300,
-                          width: 200,
+                          height: 250,
+                          width: 150,
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -218,7 +240,7 @@ class _WelcomePageState extends State<WelcomePage> {
                               SizedBox(
                                 height: 20.0,
                               ),
-                              Text('Worker',
+                              Text('Unemployment?',
                                   style: TextStyle(
                                       fontFamily: 'Averta',
                                       fontSize: 16.0,
@@ -232,6 +254,19 @@ class _WelcomePageState extends State<WelcomePage> {
                 ),
               ],
             ),
+            Column(
+              children: <Widget>[
+                FloatingActionButton(
+                  onPressed: () => Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Home())),
+                  child: Icon(Icons.camera),
+                ),
+                Text(
+                  'Our Stories',
+                  style: titoli.copyWith(fontSize: 14),
+                )
+              ],
+            )
           ],
         ),
       ),
